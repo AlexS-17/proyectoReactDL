@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../App.css";
 import CardPizza from "../components/CardPizza";
 import Header from "../components/Header";
+import { CartContext } from '../context/CartContext';
 import { db } from "../data/db";
 
-const Home = ({ cart, setCart, maxQuantity }) => {
+const Home = () => {
   const [data, setData] = useState(db);
+
+  const { cart, setCart, maxQuantity } = useContext(CartContext); // Acá se utiliza el contexto para obtener el carrito y funciones
 
   const getData = async () => {
     const res = await fetch('http://localhost:5000/api/pizzas/')

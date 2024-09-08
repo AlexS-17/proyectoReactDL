@@ -1,11 +1,14 @@
-import { useMemo } from "react";
+import { useContext, useMemo } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
-const Navbar = ({ cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart }) => {
+const Navbar = () => {
+  const { cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } = useContext(CartContext); // Importa las funciones y el estado del carrito
+
   const token = false; // Cambia esto a true para simular un usuario registrado
 
-  // State derivado de cart
+  // State derivado de cart para saber si el carrito está vacío
   const isEmpty = useMemo(() => cart.length === 0, [cart]);
 
   // Calcula el total del carrito sumando los precios

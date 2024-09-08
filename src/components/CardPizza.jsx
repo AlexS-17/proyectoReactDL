@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Card } from 'react-bootstrap';
+import { CartContext } from '../context/CartContext';
 
-const CardPizza = ({ pizza, addToCart }) => {
+const CardPizza = ({ pizza }) => {
+
+  // Importa la función 'addToCart' del contexto
+  const { addToCart } = useContext(CartContext);
 
   // Función para capitalizar la primera letra
   const capitalizeFirstLetter = (string) => {
-    if (typeof string !== 'string') return '';  // Asegúrate de que el valor sea una cadena
+    if (typeof string !== 'string') return '';  // El valor debe ser un string
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  if (!pizza) return null;  // Asegúrate de manejar el caso en el que 'pizza' es 'undefined'
+  if (!pizza) return null;  // Por si 'pizza' es 'undefined'
 
   return (
     <div className="d-flex justify-content-center mt-3">
