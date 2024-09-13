@@ -1,9 +1,13 @@
 // src/pages/Cart.jsx
 import React, { useContext, useMemo } from 'react';
 import { CartContext } from '../context/CartContext'; // Importar el contexto
+import { useUser } from '../context/UserContext';
 
 const Cart = () => {
   const { cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } = useContext(CartContext);
+
+  // Obtener el token desde el UserContext
+  const { token } = useUser();
 
   // Calcular el total del carrito sumando los precios
   const cartTotal = useMemo(() => cart.reduce((total, item) => total + (item.price * item.quantity), 0), [cart]);
@@ -33,6 +37,13 @@ const Cart = () => {
             onClick={clearCart}
           >
             Vaciar Carrito
+          </button>
+
+          <button 
+            className="btn btn-success w-40 mt-3 p-2"
+            disabled={!token} // Deshabilitar si el token es falso (no hay sesión)
+          >
+            Pagar
           </button>
         </>
       )}

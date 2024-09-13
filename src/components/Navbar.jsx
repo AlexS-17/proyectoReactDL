@@ -1,18 +1,36 @@
+// src/components/Navbar.jsx
 import { useContext, useMemo } from "react";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { useUser } from "../context/UserContext";
 
 const Navbar = () => {
+  const { token, logout } = useUser(); // Obtener token y logout del contexto
+  const navigate = useNavigate(); // Hook para redirigir
+
   const { cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } = useContext(CartContext); // Importa las funciones y el estado del carrito
 
-  const token = false; // Cambia esto a true para simular un usuario registrado
+  // Redirige al home si el token está presente y el usuario intenta acceder a login o register
+  if (token && (window.location.pathname === '/login' || window.location.pathname === '/register')) {
+    navigate('/');
+  }
+
+  // Redirige a login si el token no está presente y el usuario intenta acceder a profile
+  if (!token && window.location.pathname === '/profile') {
+    navigate('/login');
+  }
 
   // State derivado de cart para saber si el carrito está vacío
   const isEmpty = useMemo(() => cart.length === 0, [cart]);
 
   // Calcula el total del carrito sumando los precios
   const cartTotal = useMemo(() => cart.reduce((total, item) => total + (item.price * item.quantity), 0), [cart]);
+
+  const handleLogout = () => {
+    logout(); // Llama a la función de logout
+    navigate('/login'); // Redirige a la página de login después de cerrar sesión
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -51,10 +69,8 @@ const Navbar = () => {
                     </Link>
                   </Button>
 
-                  <Button className="btn btn-warning" type="submit">
-                    <Link to="/logout" className="text-black ms-1 text-decoration-none">
+                  <Button className="btn btn-warning" type="button" onClick={handleLogout}>
                     🔐 Logout
-                    </Link>
                   </Button>
                 </>
               ) : (

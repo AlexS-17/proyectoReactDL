@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Button, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; // Importa Link para redirección
 import { CartContext } from '../context/CartContext';
 
 const CardPizza = ({ pizza }) => {
@@ -35,8 +36,14 @@ const CardPizza = ({ pizza }) => {
             variant="warning" 
             className="w-100"
             onClick={() => addToCart(pizza)}>
-              Add to Cart
+              Agregar al carrito
           </Button>
+
+          <Link to={`/pizza/${pizza.id}`}>
+            <Button variant="success" className="w-100">
+              Ver Pizza
+            </Button>
+          </Link>
         </Card.Body>
       </Card>
     </div>
