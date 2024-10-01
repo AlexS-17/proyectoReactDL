@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'; // Importa Link para redirección
 import { CartContext } from '../context/CartContext';
 
 const CardPizza = ({ pizza }) => {
-
   // Importa la función 'addToCart' del contexto
   const { addToCart } = useContext(CartContext);
 
@@ -34,13 +33,14 @@ const CardPizza = ({ pizza }) => {
           </ul>
           <Button 
             variant="warning" 
-            className="w-100"
-            onClick={() => addToCart(pizza)}>
-              Agregar al carrito
+            className="w-100 mb-2" // Aplica 'w-100' y 'mb-2' aquí
+            onClick={() => addToCart(pizza)}
+          >
+            Agregar al carrito
           </Button>
 
           <Link to={`/pizza/${pizza.id}`}>
-            <Button variant="success" className="w-100">
+            <Button variant="light" className="w-100">
               Ver Pizza
             </Button>
           </Link>
@@ -51,10 +51,3 @@ const CardPizza = ({ pizza }) => {
 };
 
 export default CardPizza;
-
-
-
-
-
-
-

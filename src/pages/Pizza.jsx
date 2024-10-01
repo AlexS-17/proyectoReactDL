@@ -23,7 +23,6 @@ const Pizza = () => {
     }
   };
 
-
   useEffect(() => {
     if (pizzaId) {
       getData();
@@ -31,13 +30,16 @@ const Pizza = () => {
   }, [pizzaId]); // Volvemos a ejecutar el efecto si cambia pizzaId
 
   return (
-    <div className="container mt-5">
+    <div className="container d-flex flex-column align-items-center justify-content-center min-vh-100 mt-5">
+      <h2 className="text-center">Descripción</h2>
+      <p className="text-center">{data.desc}</p> {/* Muestra la descripción de la pizza */}
       <CardPizza pizza={data} />
+      {/* Aquí puedes añadir tu footer */}
+      <footer>
+        {/* Tu contenido de footer aquí */}
+      </footer>
     </div>
   );
 };
 
 export default Pizza;
-
-
-

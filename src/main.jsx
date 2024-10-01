@@ -3,14 +3,14 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
-import { UserProvider } from "./context/UserContext"; // Asegúrate de que UserProvider está importado correctamente
+import { UserProvider } from "./context/UserContext";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserProvider> {/* Envuelve la aplicación con UserProvider */}
-        <CartProvider> {/* Luego envuelve con CartProvider */}
+      <UserProvider>
+        <CartProvider>
           <App />
         </CartProvider>
       </UserProvider>

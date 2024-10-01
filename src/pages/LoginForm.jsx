@@ -1,12 +1,15 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { MyLoginContext } from "../context/UserContext"; // Importamos el contexto
 
 const LoginForm = () => {
+  const { login } = useContext(MyLoginContext); // requisito 4
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const validarDatos = (e) => {
+  const validarDatos = async (e) => {
     e.preventDefault();
 
     if (!email.trim() || !password.trim()) {
@@ -19,19 +22,27 @@ const LoginForm = () => {
       return false;
     }
 
-    alert("Haz iniciado sesión correctamente");
+    // Llamamos a la función iniciarSesion del contexto
+    const resultado = await login(email, password);
 
-    // Al enviar el formulario, limpiamos los campos
-    setEmail("");
-    setPassword("");
-    setError("");
+    if (resultado) {
+      alert("Has iniciado sesión correctamente");
+      setEmail("");
+      setPassword("");
+      setError("");
+    } else {
+      setError("Error al iniciar sesión");
+    }
   };
 
   return (
-
-    // Formulario
+    // Formulario de inicio de sesión
     <div className="d-flex justify-content-center align-items-center min-vh-100">
-      <form onSubmit={validarDatos} className="formulario p-4 rounded w-100 mx-auto" style={{ backgroundColor: "#000", color: "#fff" }}>
+      <form
+        onSubmit={validarDatos}
+        className="formulario p-4 rounded w-100 mx-auto"
+        style={{ backgroundColor: "#000", color: "#fff" }}
+      >
         {error && <p className="error text-light">{error}</p>}
         <h2>🍕 Bienvenido 🍕</h2>
 
@@ -66,6 +77,5 @@ const LoginForm = () => {
     </div>
   );
 };
-
 
 export default LoginForm;

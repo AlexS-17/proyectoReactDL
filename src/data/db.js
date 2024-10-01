@@ -40,7 +40,7 @@
       price: 6450,
     },
     {
-      desc: "La pizza es una preparación culinaria que consiste en un pan plano, habitualmente de forma circular, elaborado con harina de trigo, levadura, agua y sal (a veces aceite de oliva) que comúnmente se cubre con salsa de tomate, queso y otros muchos ingredientes, y que se hornea a alta temperatura, tradicionalmente en un horno de leña.",
+      desc: "La pizza de pollo picante es un delicioso platillo que combina una base de masa de pizza con salsa de tomate, queso y trozos de pollo sazonados con especias picantes. Este tipo de pizza se caracteriza por su sabor audaz y ligeramente picante, gracias al uso de ingredientes como pimientos, chiles o salsa picante, que le añaden un toque de calor. A menudo, se complementa con ingredientes adicionales como cebolla, aceitunas o verduras frescas, ofreciendo una mezcla de sabores y texturas. Es una opción popular para aquellos que disfrutan de una comida sabrosa y con un poco de picante.",
       id: "P006",
       img: "https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fpizza-2000595_640_c.jpg?alt=media&token=61325b6e-a1e0-441e-b3b5-7335ba13e8be",
       ingredients: ["mozzarella", "pimientos", "pollo grillé", "orégano"],

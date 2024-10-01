@@ -1,12 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { MyLoginContext } from "../context/UserContext"; // Importamos el contexto
 
 const RegisterForm = () => {
+  const { register } = useContext(MyLoginContext); // requisito 4
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
+  // Validamos los datos antes de enviar
   const validarDatos = (e) => {
     e.preventDefault();
 
@@ -25,9 +29,10 @@ const RegisterForm = () => {
       return false;
     }
 
-    alert("Formulario enviado correctamente");
+    // Si los datos son válidos, llamamos a la función de registro
+    register(email, password);
 
-    // Al enviar el formulario, limpiamos los campos
+    // Limpiamos los campos después de enviar el formulario
     setError("");
     setEmail("");
     setPassword("");
@@ -35,10 +40,13 @@ const RegisterForm = () => {
   };
 
   return (
-
-    // Formulario
+    // Formulario de registro
     <div className="d-flex justify-content-center align-items-center min-vh-100">
-      <form onSubmit={validarDatos} className="formulario p-4 rounded w-100 mx-auto" style={{ backgroundColor: "#000", color: "#fff" }}>
+      <form
+        onSubmit={validarDatos}
+        className="formulario p-4 rounded w-100 mx-auto"
+        style={{ backgroundColor: "#000", color: "#fff" }}
+      >
         {error && <p className="error text-light">{error}</p>}
         <h2>🍕 Formulario de registro 🍕</h2>
 
@@ -51,6 +59,7 @@ const RegisterForm = () => {
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             maxLength={30}
+            required
           />
         </div>
 
@@ -63,6 +72,7 @@ const RegisterForm = () => {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             maxLength={20}
+            required
           />
         </div>
 
@@ -75,6 +85,7 @@ const RegisterForm = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             value={confirmPassword}
             maxLength={20}
+            required
           />
         </div>
 
@@ -85,6 +96,5 @@ const RegisterForm = () => {
     </div>
   );
 };
-
 
 export default RegisterForm;

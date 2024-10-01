@@ -22,13 +22,17 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/register" element={token ? <Navigate to="/" /> : <RegisterForm />} />
         <Route path="/login" element={token ? <Navigate to="/" /> : <LoginForm />} />
+        <Route path="/register" element={token ? <Navigate to="/" /> : <RegisterForm />} />
         <Route path="/pizza/:pizzaId" element={<Pizza />} />
+        
+        {/* Uso de PrivateRoute para proteger la ruta del perfil */}
         <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
+        
         <Route path="/cart" element={<Cart />} />
-        <Route path="404" element={<NotFound />} />
-        <Route path="*" element={<h1>Error 404</h1>} />
+        
+        {/* Unificación de ruta 404 en un solo componente */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </>
@@ -36,5 +40,3 @@ function App() {
 }
 
 export default App;
-
-
